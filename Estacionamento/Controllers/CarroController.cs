@@ -6,11 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Estacionamento.Controllers
 {
-    public class EstacionamentoController : Controller
+    public class CarroController : Controller
     {
         public IActionResult Index()
         {
-            ViewBag.Title = "Estacionamento JRT";
             return View();
         }
     }

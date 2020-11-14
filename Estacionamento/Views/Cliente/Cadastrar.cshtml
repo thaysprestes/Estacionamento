@@ -1,0 +1,30 @@
+﻿@model Cliente
+
+
+<form asp-action="Cadastrar" asp-controller="Cliente" method="post" enctype="multipart/form-data">
+    <fieldset>
+        <legend>Cadastro Cliente</legend>
+
+        <div class="form-group">
+            <label asp-for="Nome">Nome</label>
+            <input asp-for="Nome" type="text" class="form-control" placeholder="João Carlos">
+            <span class="text-danger" asp-validation-for="Nome"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CPF">CPF</label>
+            <input asp-for="CPF" type="text" class="form-control" placeholder="123456789">
+            <span class="text-danger" asp-validation-for="Nome"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Telefone">Telefone</label>
+            <input asp-for="Telefone" type="text" class="form-control" placeholder="(41) 32146987">
+            <span class="text-danger" asp-validation-for="Nome"></span>
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Cadastrar"/>
+
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    </fieldset>
+</form>
