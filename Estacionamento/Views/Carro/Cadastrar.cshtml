@@ -1,0 +1,41 @@
+﻿@model Carro
+
+
+<form asp-action="Cadastrar" asp-controller="Carro" method="post" enctype="multipart/form-data">
+    <fieldset>
+        <legend>Cadastro Carro</legend>
+
+        <div class="form-group">
+            <label asp-for="Marca">Marca</label>
+            <input asp-for="Marca" type="text" class="form-control" placeholder="VW">
+            <span class="text-danger" asp-validation-for="Marca"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Modelo">Modelo</label>
+            <input asp-for="Modelo" type="text" class="form-control" placeholder="Fusca">
+            <span class="text-danger" asp-validation-for="Modelo"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Cor">Cor</label>
+            <input asp-for="Cor" type="text" class="form-control" placeholder="Preto">
+            <span class="text-danger" asp-validation-for="Cor"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Placa">Placa</label>
+            <input asp-for="Placa" type="text" class="form-control" placeholder="AAA-0000">
+            <span class="text-danger" asp-validation-for="Placa"></span>
+        </div>
+
+        @*
+        Falta inserir dropbox com Cliente
+        *@
+
+        <input type="submit" class="btn btn-primary" value="Cadastrar" />
+
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+    </fieldset>
+</form>
