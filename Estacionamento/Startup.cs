@@ -27,6 +27,7 @@ namespace Estacionamento
         {
             //Inserir os DAOs
             services.AddScoped<ClienteDAO>();
+            services.AddScoped<FuncionarioDAO>();
 
 
             //Definicao do BD e string de conexao

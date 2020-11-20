@@ -20,8 +20,6 @@ namespace Estacionamento.Controllers
             _clienteDAO = clienteDAO;
         }
 
-
-
         public IActionResult Cadastrar()
         {
             ViewBag.Title = "Cadastro Cliente";
