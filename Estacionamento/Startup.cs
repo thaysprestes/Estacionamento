@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Estacionamento.DAL;
 using Estacionamento.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,6 +26,7 @@ namespace Estacionamento
         public void ConfigureServices(IServiceCollection services)
         {
             //Inserir os DAOs
+            services.AddScoped<ClienteDAO>();
 
 
             //Definicao do BD e string de conexao

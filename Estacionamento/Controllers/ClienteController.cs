@@ -2,18 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Estacionamento.DAL;
 using Estacionamento.Models;
+using Estacionamento.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Estacionamento.Controllers
 {
     public class ClienteController : Controller
     {
-        //public IActionResult Index()
-        //{
-            
-        //    return View();
-        //}
+
+        private readonly ClienteDAO _clienteDAO;
+
+
+        public ClienteController(ClienteDAO clienteDAO)
+        {
+            _clienteDAO = clienteDAO;
+        }
+
+
 
         public IActionResult Cadastrar()
         {
@@ -21,15 +28,24 @@ namespace Estacionamento.Controllers
             return View();
         }
 
+
         [HttpPost]
         public IActionResult Cadastrar(Cliente cliente)
         {
             if (ModelState.IsValid)
             {
-                //incluir cadastro no DAO
-                return RedirectToAction("Index", "Estacionamento");
+                if (ValidarCpf.Validar(cliente.CPF))
+                {
+                    if (_clienteDAO.Cadastrar(cliente))
+                    {
+                        return RedirectToAction("Index", "Estacionamento");
+                    }
+                    ModelState.AddModelError("", "Cadastro NÃO efetuado! CPF já cadastrado!");
+                } else
+                {
+                    ModelState.AddModelError("", "CPF Inválido!");
+                }  
             }
-            ModelState.AddModelError("", "Cadastro não realizado");
             return View();
         }
     }

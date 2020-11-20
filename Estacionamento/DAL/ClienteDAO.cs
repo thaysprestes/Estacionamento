@@ -18,7 +18,22 @@ namespace Estacionamento.DAL
         }
 
 
-        
+        public bool Cadastrar(Cliente cliente)
+        {
+            if(BuscarPorCpf(cliente.CPF) == null)
+            {
+                _context.Clientes.Add(cliente);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public Cliente BuscarPorCpf(string cpf) => _context.Clientes.FirstOrDefault(x => x.CPF == cpf);
+
+
+
+
 
 
     }
