@@ -13,5 +13,15 @@ namespace Estacionamento.Controllers
             ViewBag.Title = "Estacionamento JRT";
             return View();
         }
+
+        public IActionResult Configurar()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Configurar(int vagas, float diaria, float horista)
+        {
+            return View();
+        }
     }
 }
