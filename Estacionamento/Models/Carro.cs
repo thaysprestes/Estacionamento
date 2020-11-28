@@ -23,7 +23,10 @@ namespace Estacionamento.Models
         public string Placa { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório!")]
+        [ForeignKey("ClienteId")]
         public Cliente Cliente { get; set; }
+
+        public int ClienteId { get; set; }
 
     }
 }

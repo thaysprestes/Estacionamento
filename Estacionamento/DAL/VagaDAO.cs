@@ -16,5 +16,6 @@ namespace Estacionamento.DAL
             _context = context;
         }
 
+        public List<Vaga> ListarVagas() => _context.Vagas.ToList();
     }
 }

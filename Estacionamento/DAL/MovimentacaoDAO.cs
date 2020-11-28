@@ -16,6 +16,61 @@ namespace Estacionamento.DAL
             _context = context;
         }
 
+        public  bool Estacionar(Carro carro)
+        {
+            Vaga vaga = _context.Vagas.FirstOrDefault(v => v.Status == 0);
+
+            if (vaga != null)
+            {
+                Movimentacao movimentacao = new Movimentacao();
+                movimentacao.Carro = carro;
+                vaga.Status = StatusVaga.Ocupado;
+                movimentacao.Vaga = vaga;
+                _context.Movimentacao.Add(movimentacao);
+                _context.Vagas.Update(vaga);
+                _context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public Movimentacao Retirar(Carro carro)
+        {
+            Estacionamentos estacionamento = _context.Estacionamento.FirstOrDefault(x => x.Id == 1);
+            Movimentacao movimentacao = _context.Movimentacao.Where(m => m.Carro.Id == carro.Id && m.Total == 0).FirstOrDefault();
+            Vaga vaga = movimentacao.Vaga;
+            vaga.Status = StatusVaga.Livre;
+            movimentacao.Saida = DateTime.Now;
+            if(movimentacao.Modalidade == Modalidade.Diaria)
+            {
+                movimentacao.Total = estacionamento.Diaria * (movimentacao.Saida - movimentacao.Entrada).TotalDays;
+            }
+            else
+            {
+                movimentacao.Total = estacionamento.Horista * (movimentacao.Saida - movimentacao.Entrada).TotalHours;
+            }
+            
+
+            _context.Movimentacao.Update(movimentacao);
+            _context.Vagas.Update(vaga);
+            _context.SaveChanges();
+
+            return movimentacao;
+        }
+
+        public  Movimentacao ConsultarSeCarroEstacionado(Carro carro) => _context.Movimentacao.Where(m => m.Carro.Id == carro.Id && m.Total == 0).FirstOrDefault();
+
+        public  List<Movimentacao> ListarCarrosEstacionados() => _context.Movimentacao.Where(m => m.Total == 0).ToList();
+        //public  List<Movimentacao> ListarCarrosEstacionados(int id) => _context.Movimentacoes.Where(m => m.Carro.Id == id).ToList();
+        public  List<Movimentacao> Listar() => _context.Movimentacao.ToList();
+
+        public  double SomarFaturamento(DateTime dtInicial, DateTime dtFinal) => _context.Movimentacao.Where(m => m.Saida >= dtInicial && m.Saida <= dtFinal).Sum(x => x.Total);
+
+        //talvez tenha que fazer um join? ver exemplo produto/categoria no projeto Vendas WEB
+        public  List<Movimentacao> BuscarHistoricoDeCarroEstacionado(int id) => _context.Movimentacao.Where(m => m.Carro.Id == id && m.Total != 0).ToList();
 
     }
 }

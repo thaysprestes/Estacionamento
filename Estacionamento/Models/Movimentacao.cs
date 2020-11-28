@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace Estacionamento.Models
 {
+    public enum Modalidade
+    {
+        Diaria,
+        Horista
+    }
+
     [Table("Movimentacao")]
     public class Movimentacao : BaseModel
     {
@@ -18,6 +24,8 @@ namespace Estacionamento.Models
         public Vaga Vaga { get; set; }
 
         public double Total { get; set; }
+
+        public Modalidade Modalidade { get; set; }
 
         public Movimentacao()
         {

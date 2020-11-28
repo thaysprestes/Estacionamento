@@ -31,8 +31,21 @@ namespace Estacionamento.DAL
         public Cliente BuscarPorCpf(string cpf) => _context.Clientes.FirstOrDefault(x => x.CPF == cpf);
 
 
+        public bool Alterar(Cliente c)
+        {
+            if (BuscarPorId(c.Id) != null)
+            {
+                _context.Clientes.Update(c);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
 
-
+        public List<Cliente> Listar() => _context.Clientes.ToList(); // listar pela id
+        public Cliente BuscarPorId(int id) => _context.Clientes.Find(id);
+        public List<Cliente> ListarASC() => _context.Clientes.OrderBy(p => p.Nome).ToList(); // listar pelo nome ascendente
+        public List<Cliente> ListarDESC() => _context.Clientes.OrderByDescending(p => p.Nome).ToList(); // listar pelo nome descendente
 
 
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Estacionamento.Models
 {
     [Table("Estacionamento")]
-    public class Estacionamento : BaseModel
+    public class Estacionamentos : BaseModel
     {
         [Required(ErrorMessage = "Campo obrigatório!")]
         public int Vagas { get; set; }
