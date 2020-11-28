@@ -30,10 +30,10 @@ namespace Estacionamento.Controllers
         [HttpPost]
         public IActionResult Cadastrar(Carro carro)
         {
+           
             if (ModelState.IsValid)
             {
                 carro.Cliente = _clienteDAO.BuscarPorId(carro.ClienteId);
-
                 if (_carroDAO.Cadastrar(carro))
                 {
                     return RedirectToAction("Index", "Estacionamento");

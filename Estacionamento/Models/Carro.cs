@@ -22,7 +22,6 @@ namespace Estacionamento.Models
         [Required(ErrorMessage = "Campo obrigatório!")]
         public string Placa { get; set; }
 
-        [Required(ErrorMessage = "Campo obrigatório!")]
         [ForeignKey("ClienteId")]
         public Cliente Cliente { get; set; }
 
