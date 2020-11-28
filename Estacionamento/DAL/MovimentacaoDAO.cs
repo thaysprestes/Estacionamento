@@ -16,7 +16,7 @@ namespace Estacionamento.DAL
             _context = context;
         }
 
-        public  bool Estacionar(Carro carro)
+        public  bool Estacionar(Carro carro, string modalidade)
         {
             Vaga vaga = _context.Vagas.FirstOrDefault(v => v.Status == 0);
 
@@ -26,6 +26,14 @@ namespace Estacionamento.DAL
                 movimentacao.Carro = carro;
                 vaga.Status = StatusVaga.Ocupado;
                 movimentacao.Vaga = vaga;
+                if(modalidade == "Diaria")
+                {
+                    movimentacao.Modalidade = Modalidade.Diaria;
+                }
+                else
+                {
+                    movimentacao.Modalidade = Modalidade.Horista;
+                }
                 _context.Movimentacao.Add(movimentacao);
                 _context.Vagas.Update(vaga);
                 _context.SaveChanges();

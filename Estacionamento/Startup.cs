@@ -30,6 +30,7 @@ namespace Estacionamento
             services.AddScoped<FuncionarioDAO>();
             services.AddScoped<CarroDAO>();
             services.AddScoped<EstacionamentoDAO>();
+            services.AddScoped<MovimentacaoDAO>();
 
 
             //Definicao do BD e string de conexao
