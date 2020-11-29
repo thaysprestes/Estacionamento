@@ -82,3 +82,17 @@ body {
 .dropdown {
     margin-bottom: 30px;
 }
+
+.bitcoin {
+    text-align: center;
+    background: #eae9e4;
+    font-family:Arial;
+    font-size: 8px;
+    font-weight:bold;
+    width: 300px;
+}
+
+
+
+
+
