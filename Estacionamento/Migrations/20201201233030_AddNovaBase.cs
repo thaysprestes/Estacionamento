@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Estacionamento.Migrations
 {
-    public partial class CriarBase : Migration
+    public partial class AddNovaBase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,6 +14,8 @@ namespace Estacionamento.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CriadoEm = table.Column<DateTime>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    Senha = table.Column<string>(nullable: false),
                     Nome = table.Column<string>(nullable: false),
                     CPF = table.Column<string>(nullable: false),
                     Telefone = table.Column<string>(nullable: false)
@@ -104,7 +106,8 @@ namespace Estacionamento.Migrations
                     Saida = table.Column<DateTime>(nullable: false),
                     CarroId = table.Column<int>(nullable: true),
                     VagaId = table.Column<int>(nullable: true),
-                    Total = table.Column<double>(nullable: false)
+                    Total = table.Column<double>(nullable: false),
+                    Modalidade = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

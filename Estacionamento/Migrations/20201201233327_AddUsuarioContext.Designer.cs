@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Estacionamento.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20201127233138_AddClienteEmCarro")]
-    partial class AddClienteEmCarro
+    [Migration("20201201233327_AddUsuarioContext")]
+    partial class AddUsuarioContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,9 +50,14 @@ namespace Estacionamento.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UsuarioId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ClienteId");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Carros");
                 });
@@ -71,7 +76,15 @@ namespace Estacionamento.Migrations
                     b.Property<DateTime>("CriadoEm")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -84,7 +97,7 @@ namespace Estacionamento.Migrations
                     b.ToTable("Clientes");
                 });
 
-            modelBuilder.Entity("Estacionamento.Models.Estacionamento", b =>
+            modelBuilder.Entity("Estacionamento.Models.Estacionamentos", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -151,6 +164,9 @@ namespace Estacionamento.Migrations
                     b.Property<DateTime>("Entrada")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Modalidade")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Saida")
                         .HasColumnType("datetime2");
 
@@ -167,6 +183,73 @@ namespace Estacionamento.Migrations
                     b.HasIndex("VagaId");
 
                     b.ToTable("Movimentacao");
+                });
+
+            modelBuilder.Entity("Estacionamento.Models.Usuario", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CPF")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CriadoEm")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("Estacionamento.Models.Vaga", b =>
@@ -194,6 +277,10 @@ namespace Estacionamento.Migrations
                         .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Estacionamento.Models.Usuario", null)
+                        .WithMany("Carros")
+                        .HasForeignKey("UsuarioId");
                 });
 
             modelBuilder.Entity("Estacionamento.Models.Movimentacao", b =>

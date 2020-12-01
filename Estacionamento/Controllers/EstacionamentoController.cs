@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Estacionamento.DAL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Estacionamento.Controllers
@@ -25,6 +26,7 @@ namespace Estacionamento.Controllers
             return View(_carroDAO.Listar());
         }
 
+        [Authorize]
         public IActionResult Configurar()
         {
             return View();
