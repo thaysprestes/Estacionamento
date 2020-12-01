@@ -14,6 +14,6 @@ function buscaBitcoin() {
 
 setInterval(() => {
     buscaBitcoin();
-}, 10000);
+}, 50000);
 
 
