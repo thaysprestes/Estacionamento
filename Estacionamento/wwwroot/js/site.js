@@ -1,4 +1,19 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿
+const realCompra = document.querySelector(".realCompra");
 
-// Write your JavaScript code.
+function buscaBitcoin() {
+    const bitcoin = fetch("https://blockchain.info/ticker");
+
+    bitcoin
+        .then((r) => {
+            return r.json();
+        }).then((body)=>{
+            realCompra.innerText = body.BRL.buy;
+        });
+}
+
+setInterval(() => {
+    buscaBitcoin();
+}, 10000);
+
+
