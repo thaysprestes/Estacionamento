@@ -1,0 +1,17 @@
+﻿
+
+
+<form asp-action="Remover" asp-controller="Funcionario" method="post" enctype="multipart/form-data">
+    <fieldset>
+        <legend>Remover Funcionário</legend>
+
+        <div class="form-group">
+            <label for="cpf">Informe CPF:</label>
+            <input name="cpf" type="text" class="form-control" placeholder="000.000.000-00">
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Remover" />
+
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    </fieldset>
+</form>
