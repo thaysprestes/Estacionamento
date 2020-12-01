@@ -63,6 +63,8 @@ namespace Estacionamento.DAL
 
         public List<Carro> ListarCarroIdProprietarioASC(int id) => _context.Carros.Where(c => c.ClienteId == id).ToList();
 
+        public List<Carro> Listar() => _context.Carros.ToList();
+
 
     }
 }
