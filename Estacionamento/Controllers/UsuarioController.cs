@@ -32,7 +32,7 @@ namespace VendasWeb.Controllers
         }
 
         // GET: Usuario/Create
-        public IActionResult Create()
+        public IActionResult Cadastrar()
         {
             return View();
         }
@@ -42,7 +42,7 @@ namespace VendasWeb.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Email,Senha,Id,CriadoEm,ConfirmacaoSenha,Nome,CPF,Telefone")] Cliente usuarioView)
+        public async Task<IActionResult> Cadastrar([Bind("Email,Senha,Id,CriadoEm,ConfirmacaoSenha,Nome,CPF,Telefone")] Cliente usuarioView)
         {
             if (ModelState.IsValid)
             {
