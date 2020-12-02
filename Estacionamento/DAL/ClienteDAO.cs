@@ -16,7 +16,6 @@ namespace Estacionamento.DAL
             _context = context;
         }
 
-
         public bool Cadastrar(Cliente cliente)
         {
             if(BuscarPorCpf(cliente.CPF) == null)

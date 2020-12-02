@@ -10,7 +10,6 @@ namespace Estacionamento.DAL
     {
         private readonly Context _context;
 
-
         public VagaDAO(Context context)
         {
             _context = context;

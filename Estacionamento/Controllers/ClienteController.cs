@@ -14,7 +14,6 @@ namespace Estacionamento.Controllers
 
         private readonly ClienteDAO _clienteDAO;
 
-
         public ClienteController(ClienteDAO clienteDAO)
         {
             _clienteDAO = clienteDAO;
@@ -25,7 +24,6 @@ namespace Estacionamento.Controllers
             ViewBag.Title = "Cadastro Cliente";
             return View();
         }
-
 
         [HttpPost]
         public IActionResult Cadastrar(Cliente cliente)

@@ -9,7 +9,8 @@ namespace Estacionamento.Models
     public enum StatusVaga
     {
         Livre,
-        Ocupado
+        Ocupado,
+        Reserva
     }
 
     [Table("Vagas")]

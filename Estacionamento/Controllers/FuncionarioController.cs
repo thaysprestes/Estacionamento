@@ -14,19 +14,16 @@ namespace Estacionamento.Controllers
 
         private readonly FuncionarioDAO _funcionarioDAO;
 
-
         public FuncionarioController(FuncionarioDAO funcionarioDAO)
         {
             _funcionarioDAO = funcionarioDAO;
         }
-
 
         public IActionResult Cadastrar()
         {
             ViewBag.Title = "Cadastro Funcionário";
             return View();
         }
-
 
         [HttpPost]
         public IActionResult Cadastrar(Funcionario funcionario)
@@ -59,7 +56,6 @@ namespace Estacionamento.Controllers
             return View();
         }
 
-
         [HttpPost]
         public IActionResult Remover(string cpf)
         {
@@ -80,8 +76,5 @@ namespace Estacionamento.Controllers
             return View();
             
         }
-
-
-
     }
 }

@@ -29,7 +29,6 @@ namespace Estacionamento.DAL
 
         public Funcionario BuscarPorCpf(string cpf) => _context.Funcionarios.FirstOrDefault(x => x.CPF == cpf);
 
-
         public bool Remover(string cpf)
         {
             if(BuscarPorCpf(cpf) != null)

@@ -1,6 +1,5 @@
 ﻿@model List<Carro>
 
-
 <div class="row">
     <div class="col-md-4">
         <div class="bitcoin">
@@ -16,16 +15,13 @@
     @foreach (Carro carroCadastrado in Model)
     {
         <div class="col-sm-3 div-conteudo">
-            <img src="~/images/icon.ico" alt="Imagem de Carro" style="width:100px;height:80px" />
+            <img src="~/images/icon.ico" alt="Imagem de Carro" style="width:80px;height:80px" />
             <h1>@carroCadastrado.Placa</h1>
             <h2>@carroCadastrado.Modelo</h2>
         </div>
     }
 </div>
 
+<script src="~/js/api.js"></script>
 
-
-
-
-<script src="~/js/site.js"></script>
 
