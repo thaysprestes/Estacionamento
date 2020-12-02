@@ -10,7 +10,7 @@ namespace Estacionamento.Models
     {
         Livre,
         Ocupado,
-        Reserva
+        Reservado
     }
 
     [Table("Vagas")]

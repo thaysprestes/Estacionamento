@@ -1,4 +1,6 @@
-﻿<form asp-action="Retirar" asp-controller="Movimentacao" method="post" enctype="multipart/form-data">
+﻿
+
+<form asp-action="Retirar" asp-controller="Movimentacao" method="post" enctype="multipart/form-data">
     <fieldset>
         <legend>Retirar carro</legend>
 
@@ -14,3 +16,7 @@
         <div class="text-danger" asp-validation-summary="ModelOnly"></div>
     </fieldset>
 </form>
+<br/>
+<span>@ViewBag.Total</span><br />
+<span>@ViewBag.Valor</span>
+<br />
