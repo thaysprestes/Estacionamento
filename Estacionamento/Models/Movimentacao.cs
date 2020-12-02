@@ -9,7 +9,8 @@ namespace Estacionamento.Models
     public enum Modalidade
     {
         Diaria,
-        Horista
+        Horista,
+        Reserva
     }
 
     [Table("Movimentacao")]
