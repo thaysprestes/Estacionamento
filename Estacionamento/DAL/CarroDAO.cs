@@ -1,4 +1,5 @@
 ﻿using Estacionamento.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,19 +52,19 @@ namespace Estacionamento.DAL
 
         public Carro BuscarCarroPorPlaca(string placa)
         {
-            return _context.Carros.FirstOrDefault(c => c.Placa.Equals(placa.ToUpper()));
+            return _context.Carros.Include(x => x.Cliente).FirstOrDefault(c => c.Placa.Equals(placa.ToUpper()));
         }
 
         public int ContarCarrosProprietario(int id)
         {
-            return _context.Carros.Where(c => c.Cliente.Id == id).Count(); ;
+            return _context.Carros.Include(x => x.Cliente).Where(c => c.Cliente.Id == id).Count(); ;
         }
 
-        public Carro BuscarPorId(int id) => _context.Carros.Find(id);
+        public Carro BuscarPorId(int id) => _context.Carros.Include(x => x.Cliente).Where(c => c.Id == id).FirstOrDefault();
 
         public List<Carro> ListarCarroIdProprietarioASC(int id) => _context.Carros.Where(c => c.ClienteId == id).ToList();
 
-        public List<Carro> Listar() => _context.Carros.ToList();
+        public List<Carro> Listar() => _context.Carros.Include(x => x.Cliente).ToList();
 
 
     }

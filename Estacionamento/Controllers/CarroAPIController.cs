@@ -30,10 +30,10 @@ namespace Estacionamento.Controllers
 
             if (carros.Count > 0)
             {
-                foreach (var item in carros)
-                {
-                    item.Cliente = _clienteDAO.BuscarPorId(item.ClienteId);
-                }
+                //foreach (var item in carros)
+                //{
+                //    item.Cliente = _clienteDAO.BuscarPorId(item.ClienteId);
+                //}
                 return Ok(carros);
             }
 
@@ -48,7 +48,7 @@ namespace Estacionamento.Controllers
 
             if (carro != null)
             {
-                carro.Cliente = _clienteDAO.BuscarPorId(carro.ClienteId);
+                //carro.Cliente = _clienteDAO.BuscarPorId(carro.ClienteId);
                 return Ok(carro);
             }
 
