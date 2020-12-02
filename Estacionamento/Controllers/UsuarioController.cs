@@ -60,7 +60,7 @@ namespace VendasWeb.Controllers
                 {
                     _context.Add(usuarioView);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("Index", "Estacionamento");
                 }
                 AdicionarErros(resultado);
             }
