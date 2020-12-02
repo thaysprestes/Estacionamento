@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Usuario> SignInManager
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -17,7 +19,7 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" asp-action="Cadastrar" asp-controller="Cliente">Cadastrar Cliente</a>
+                    <a class="nav-link" asp-action="Cadastrar" asp-controller="Usuario">Cadastrar Cliente</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" asp-action="Cadastrar" asp-controller="Carro">Cadastrar Carro</a>
@@ -55,6 +57,25 @@
             </ul>
 
         </div>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-action="Logout" asp-controller="Usuario">Logout</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-action="Login" asp-controller="Usuario">Login</a>
+                    </li>
+                }
+
+            </ul>
+        </div>
     </nav>
 
     <div class="container margem">
@@ -68,7 +89,7 @@
             Desenvolvido por JRT &copy;
         </p>
     </footer>
-    
+
     <script src="~/lib/jquery/jquery-3.5.1.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
 
