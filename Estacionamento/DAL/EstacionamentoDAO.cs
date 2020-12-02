@@ -1,4 +1,5 @@
 ﻿using Estacionamento.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,38 +19,44 @@ namespace Estacionamento.DAL
 
         public bool Configurar(Estacionamentos e)
         {
-            if (Buscar() == null)
+            Estacionamentos estacionamento = Buscar();
+   
+            if (estacionamento == null)
             {
-                _context.Estacionamento.Add(e);
+                estacionamento = e;
+                _context.Estacionamento.Add(estacionamento);
                 _context.SaveChanges();
                 return true;
             }
-            else if (Buscar() != null)
+            else if (estacionamento != null)
             {
-                _context.Estacionamento.Update(e);
+                estacionamento.Vagas = e.Vagas;
+                estacionamento.Diaria = e.Diaria;
+                estacionamento.Horista = e.Horista;
+                _context.Estacionamento.Update(estacionamento);
                 _context.SaveChanges();
                 return true;
             }
             return false;
         }
 
-        //public  bool LimparVagas()
-        //{
-        //    List<Vaga> vagas = _context.Vagas.Where(v => v.Status == StatusVaga.Ocupado).ToList();
+        public  bool LimparVagas()
+        {
+            List<Vaga> vagas = _context.Vagas.Where(v => v.Status == StatusVaga.Ocupado || v.Status == StatusVaga.Reservado).ToList();
 
 
-        //    if (vagas.Count == 0)
-        //    {
-        //        _context.Database.ExecuteSqlRaw("ALTER TABLE Movimentacao NOCHECK CONSTRAINT FK_Movimentacao_Vagas_VagaId");
-        //        _context.Vagas.RemoveRange(_context.Vagas);
-        //        _context.Database.ExecuteSqlRaw("DBCC CHECKIDENT(Vagas, RESEED, 0)");
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
+            if (vagas.Count == 0)
+            {
+                _context.Database.ExecuteSqlRaw("ALTER TABLE Movimentacao NOCHECK CONSTRAINT FK_Movimentacao_Vagas_VagaId");
+                _context.Vagas.RemoveRange(_context.Vagas);
+                _context.Database.ExecuteSqlRaw("DBCC CHECKIDENT(Vagas, RESEED, 0)");
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         public bool CadastrarVagas(int v)
         {

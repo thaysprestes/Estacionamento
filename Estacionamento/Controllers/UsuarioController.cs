@@ -88,7 +88,7 @@ namespace VendasWeb.Controllers
                 string name = _signInManager.Context.User.Identity.Name;
                 if (resultado.Succeeded)
                 {
-                    return RedirectToAction("Reservar", "Movimentacao");
+                    return RedirectToAction("Index", "Estacionamento");
                 }
                 ModelState.AddModelError("", "Login ou senha inválidos");
                 return View(usuario);

@@ -30,19 +30,28 @@ namespace Estacionamento.Controllers
         [Authorize]
         public IActionResult Configurar()
         {
+            Estacionamentos estacionamento = _estacionamentoDAO.Buscar();
+            if (estacionamento != null)
+            {
+                return View(estacionamento);
+            }
             return View();
         }
+
         [HttpPost]
         public IActionResult Configurar(Estacionamentos estacionamento)
         {
             if (ModelState.IsValid)
             {
-                _estacionamentoDAO.CadastrarVagas(estacionamento.Vagas);
-                if (_estacionamentoDAO.Configurar(estacionamento))
+                if (_estacionamentoDAO.LimparVagas())
                 {
-                    return RedirectToAction("Index", "Estacionamento");
+                    if (_estacionamentoDAO.Configurar(estacionamento))
+                    {
+                        _estacionamentoDAO.CadastrarVagas(estacionamento.Vagas);
+                        return RedirectToAction("Index", "Estacionamento");
+                    }
+                    ModelState.AddModelError("", "Não foi possível configurar o estacionamento");
                 }
-                ModelState.AddModelError("", "Não foi possível configurar o estacionamento");
             }
             return View();
         }
