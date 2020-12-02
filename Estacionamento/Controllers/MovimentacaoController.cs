@@ -24,6 +24,16 @@ namespace Estacionamento.Controllers
             return View();
         }
 
+        public IActionResult Estacionar()
+        {
+            return View();
+        }
+
+        public IActionResult Retirar()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Reservar(string placa, string id)
         {
