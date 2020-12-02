@@ -26,7 +26,7 @@ namespace Estacionamento.Models
 
         public DbSet<Vaga> Vagas { get; set; }
 
-        public DbSet<Cliente> Usuarios { get; set; }
+        public DbSet<Funcionario> Usuarios { get; set; }
 
     }
 }

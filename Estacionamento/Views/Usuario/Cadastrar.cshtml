@@ -1,8 +1,8 @@
-﻿@model Cliente
+﻿@model Funcionario
 
 <form asp-action="Cadastrar">
     <fieldset>
-        <legend>Cadastro Cliente</legend>
+        <legend>Cadastrar Funcionário</legend>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Nome">Nome</label>
@@ -13,13 +13,13 @@
         <div class="form-group">
             <label asp-for="CPF">CPF</label>
             <input asp-for="CPF" type="text" class="form-control cpf" placeholder="333.333.333-33">
-            <span class="text-danger" asp-validation-for="Nome"></span>
+            <span class="text-danger" asp-validation-for="CPF"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="Telefone">Telefone</label>
-            <input asp-for="Telefone" type="text" class="form-control sp_celphones" placeholder="(12) 31231-2312">
-            <span class="text-danger" asp-validation-for="Nome"></span>
+            <label asp-for="Funcao">Função</label>
+            <input asp-for="Funcao" type="text" class="form-control" placeholder="Admin">
+            <span class="text-danger" asp-validation-for="Funcao"></span>
         </div>
 
         <div class="form-group">
@@ -37,6 +37,9 @@
             <input asp-for="ConfirmacaoSenha" class="form-control" />
             <span asp-validation-for="ConfirmacaoSenha" class="text-danger"></span>
         </div>
+        <br />
+        <br />
+
         <div class="form-group">
             <input type="submit" value="Cadastrar" class="btn btn-primary" />
         </div>

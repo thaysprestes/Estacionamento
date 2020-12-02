@@ -18,13 +18,11 @@ namespace Estacionamento.DAL
 
         public bool Cadastrar(Funcionario funcionario)
         {
-            if (BuscarPorCpf(funcionario.CPF) == null)
-            {
+           
                 _context.Funcionarios.Add(funcionario);
                 _context.SaveChanges();
                 return true;
-            }
-            return false;
+            
         }
 
         public Funcionario BuscarPorCpf(string cpf) => _context.Funcionarios.FirstOrDefault(x => x.CPF == cpf);

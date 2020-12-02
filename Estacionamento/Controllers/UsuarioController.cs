@@ -28,7 +28,7 @@ namespace VendasWeb.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Clientes.ToListAsync());
+            return View(await _context.Funcionarios.ToListAsync());
         }
 
         // GET: Usuario/Create
@@ -42,7 +42,7 @@ namespace VendasWeb.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Cadastrar([Bind("Email,Senha,Id,CriadoEm,ConfirmacaoSenha,Nome,CPF,Telefone")] Cliente usuarioView)
+        public async Task<IActionResult> Cadastrar([Bind("Email,Senha,Id,CriadoEm,ConfirmacaoSenha,Nome,CPF,Funcao")] Funcionario usuarioView)
         {
             if (ModelState.IsValid)
             {
@@ -52,12 +52,13 @@ namespace VendasWeb.Controllers
                     Email = usuarioView.Email,
                     CPF = usuarioView.CPF,
                     Nome = usuarioView.Nome,
-                    Telefone = usuarioView.Telefone
+                    Funcao = usuarioView.Funcao
                 };
                 var resultado = await _userManager.CreateAsync(usuario, usuarioView.Senha);
 
                 if (resultado.Succeeded)
                 {
+                    _context.Funcionarios.Add(usuarioView);
                     _context.Add(usuarioView);
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Index", "Estacionamento");
@@ -81,10 +82,8 @@ namespace VendasWeb.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([Bind("Email, Senha")] Cliente usuario)
+        public async Task<IActionResult> Login([Bind("Email, Senha")] Funcionario usuario)
         {
-            if (ModelState.IsValid)
-            {
                 var resultado = await _signInManager.PasswordSignInAsync(usuario.Email, usuario.Senha, false, false);
                 string name = _signInManager.Context.User.Identity.Name;
                 if (resultado.Succeeded)
@@ -93,10 +92,6 @@ namespace VendasWeb.Controllers
                 }
                 ModelState.AddModelError("", "Login ou senha inválidos");
                 return View(usuario);
-            }
-            ModelState.AddModelError("", "Preencham todos os campos");
-            return View(usuario);
-
         }
 
         public async Task<IActionResult> Logout()

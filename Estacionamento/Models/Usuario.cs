@@ -15,6 +15,7 @@ namespace Estacionamento.Models
         }
         public DateTime CriadoEm { get; set; }
 
+
         [Required(ErrorMessage = "Campo obrigatório!")]
         public string Nome { get; set; }
 
@@ -22,8 +23,6 @@ namespace Estacionamento.Models
         public string CPF { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório!")]
-        public string Telefone { get; set; }
-
-        public List<Carro> Carros { get; set; }
+        public string Funcao { get; set; }
     }
 }
