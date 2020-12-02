@@ -1,4 +1,5 @@
 ﻿using Estacionamento.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +49,7 @@ namespace Estacionamento.DAL
         public Movimentacao Retirar(Carro carro)
         {
             Estacionamentos estacionamento = _context.Estacionamento.FirstOrDefault(x => x.Id == 1);
-            Movimentacao movimentacao = _context.Movimentacao.Where(m => m.Carro.Id == carro.Id && m.Total == 0).FirstOrDefault();
+            Movimentacao movimentacao = _context.Movimentacao.Include(x => x.Vaga).Where(m => m.Carro.Id == carro.Id && m.Total == 0).FirstOrDefault();
             Vaga vaga = movimentacao.Vaga;
             vaga.Status = StatusVaga.Livre;
             movimentacao.Saida = DateTime.Now;
