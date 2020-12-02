@@ -25,7 +25,18 @@
                     <a class="nav-link" asp-action="Cadastrar" asp-controller="Carro">Cadastrar Carro</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-action="Reservar" asp-controller="Movimentacao">Reserva de vaga</a>
+
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Movimentação
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" asp-action="Reservar" asp-controller="Movimentacao">Reservar Vaga</a>
+                        <a class="dropdown-item" asp-action="Estacionar" asp-controller="Movimentacao">Estacionar Carro</a>
+                        <a class="dropdown-item" asp-action="Retirar" asp-controller="Movimentacao">Retirar Carro</a>
+                    </div>
                 </li>
 
 
@@ -34,8 +45,8 @@
                         Funcionário
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="@Url.Action("Cadastrar","Funcionario")">Cadastrar Funcionario</a>
-                        <a class="dropdown-item" asp-action="Remover" asp-controller="Funcionario">Remover Funcionario</a>
+                        <a class="dropdown-item" href="@Url.Action("Cadastrar","Funcionario")">Cadastrar Funcionário</a>
+                        <a class="dropdown-item" asp-action="Remover" asp-controller="Funcionario">Remover Funcionário</a>
                     </div>
                 </li>
 
