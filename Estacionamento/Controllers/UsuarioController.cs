@@ -83,14 +83,20 @@ namespace VendasWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([Bind("Email, Senha")] Cliente usuario)
         {
-            var resultado = await _signInManager.PasswordSignInAsync(usuario.Email, usuario.Senha, false, false);
-            string name = _signInManager.Context.User.Identity.Name;
-            if (resultado.Succeeded)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("Reservar", "Movimentacao");
+                var resultado = await _signInManager.PasswordSignInAsync(usuario.Email, usuario.Senha, false, false);
+                string name = _signInManager.Context.User.Identity.Name;
+                if (resultado.Succeeded)
+                {
+                    return RedirectToAction("Reservar", "Movimentacao");
+                }
+                ModelState.AddModelError("", "Login ou senha inválidos");
+                return View(usuario);
             }
-            ModelState.AddModelError("", "Login ou senha inválidos");
+            ModelState.AddModelError("", "Preencham todos os campos");
             return View(usuario);
+
         }
 
         public async Task<IActionResult> Logout()
