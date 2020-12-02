@@ -12,19 +12,19 @@
 
         <div class="form-group">
             <label asp-for="CPF">CPF</label>
-            <input asp-for="CPF" type="text" class="form-control" placeholder="123456789">
+            <input asp-for="CPF" type="text" class="form-control cpf" placeholder="333.333.333-33">
             <span class="text-danger" asp-validation-for="Nome"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="Telefone">Telefone</label>
-            <input asp-for="Telefone" type="text" class="form-control" placeholder="(41) 32146987">
+            <input asp-for="Telefone" type="text" class="form-control sp_celphones" placeholder="(12) 31231-2312">
             <span class="text-danger" asp-validation-for="Nome"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="Email" class="control-label"></label>
-            <input asp-for="Email" class="form-control" />
+            <input asp-for="Email" type="email" class="form-control" placeholder="joao@email.com.br" />
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
         <div class="form-group">

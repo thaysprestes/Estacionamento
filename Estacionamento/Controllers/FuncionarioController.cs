@@ -48,6 +48,10 @@ namespace Estacionamento.Controllers
             return View();
         }
 
+        public IActionResult Editar()
+        {
+            return View();
+        }
 
         public IActionResult Remover()
         {

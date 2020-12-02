@@ -7,11 +7,13 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" asp-action="Index" asp-controller="Estacionamento">Estacionamento JRT</a>
+        <a class="navbar-brand" asp-action="Index" asp-controller="Estacionamento"><i class="fas fa-car-alt"></i> Estacionamento JRT</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -19,39 +21,37 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" asp-action="Cadastrar" asp-controller="Usuario">Cadastrar Cliente</a>
+                    <a class="nav-link" asp-action="Cadastrar" asp-controller="Usuario"><i class="fa fa-user"></i> Cadastrar Cliente</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-action="Cadastrar" asp-controller="Carro">Cadastrar Carro</a>
-                </li>
-                <li class="nav-item">
-
+                    <a class="nav-link" asp-action="Cadastrar" asp-controller="Carro"><i class="fa fa-car"></i> Cadastrar Carro</a>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Movimentação
+                        <i class="fa fa-parking"></i> Movimentação
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" asp-action="Reservar" asp-controller="Movimentacao">Reservar Vaga</a>
-                        <a class="dropdown-item" asp-action="Estacionar" asp-controller="Movimentacao">Estacionar Carro</a>
-                        <a class="dropdown-item" asp-action="Retirar" asp-controller="Movimentacao">Retirar Carro</a>
+                        <a class="dropdown-item" asp-action="Reservar" asp-controller="Movimentacao"><i class="fa fa-warehouse"></i> Reservar Vaga</a>
+                        <a class="dropdown-item" asp-action="Estacionar" asp-controller="Movimentacao"><i class="fa fa-sign-in-alt"></i> Estacionar Carro</a>
+                        <a class="dropdown-item" asp-action="Retirar" asp-controller="Movimentacao"><i class="fa fa-sign-out-alt"></i> Retirar Carro</a>
                     </div>
                 </li>
 
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Funcionário
+                        <i class="fa fa-user-tie"></i> Funcionário
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="@Url.Action("Cadastrar","Funcionario")">Cadastrar Funcionário</a>
-                        <a class="dropdown-item" asp-action="Remover" asp-controller="Funcionario">Remover Funcionário</a>
+                        <a class="dropdown-item" asp-action="Cadastrar" asp-controller="Funcionario"><i class="fa fa-user-plus"></i> Cadastrar Funcionário</a>
+                        <a class="dropdown-item" asp-action="Editar" asp-controller="Funcionario"><i class="fa fa-user-edit"></i> Editar Funcionário</a>
+                        <a class="dropdown-item" asp-action="Remover" asp-controller="Funcionario"><i class="fa fa-user-minus"></i> Remover Funcionário</a>
                     </div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" asp-action="Configurar" asp-controller="Estacionamento">Configurar Estacionamento</a>
+                    <a class="nav-link" asp-action="Configurar" asp-controller="Estacionamento"><i class="fa fa-cogs"></i> Configurar Estacionamento</a>
                 </li>
 
             </ul>
@@ -64,13 +64,13 @@
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <li class="nav-item active">
-                        <a class="nav-link" asp-action="Logout" asp-controller="Usuario">Logout</a>
+                        <a class="nav-link" asp-action="Logout" asp-controller="Usuario"><i class="fa fa-door-open"></i> Logout</a>
                     </li>
                 }
                 else
                 {
                     <li class="nav-item active">
-                        <a class="nav-link" asp-action="Login" asp-controller="Usuario">Login</a>
+                        <a class="nav-link" asp-action="Login" asp-controller="Usuario"><i class="fa fa-key"></i> Login</a>
                     </li>
                 }
 
@@ -92,6 +92,9 @@
 
     <script src="~/lib/jquery/jquery-3.5.1.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery-mask/jquery.mask.min.js"></script>
+    <script src="~/lib/fontawesome/js/all.js"></script>
+    <script src="~/js/site.js"></script>
 
 </body>
 </html>
