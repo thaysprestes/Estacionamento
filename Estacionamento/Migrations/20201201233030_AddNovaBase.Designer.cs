@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Estacionamento.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20201116222124_CriarBase")]
-    partial class CriarBase
+    [Migration("20201201233030_AddNovaBase")]
+    partial class AddNovaBase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,7 +71,15 @@ namespace Estacionamento.Migrations
                     b.Property<DateTime>("CriadoEm")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -84,7 +92,7 @@ namespace Estacionamento.Migrations
                     b.ToTable("Clientes");
                 });
 
-            modelBuilder.Entity("Estacionamento.Models.Estacionamento", b =>
+            modelBuilder.Entity("Estacionamento.Models.Estacionamentos", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -150,6 +158,9 @@ namespace Estacionamento.Migrations
 
                     b.Property<DateTime>("Entrada")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Modalidade")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Saida")
                         .HasColumnType("datetime2");

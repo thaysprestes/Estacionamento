@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Estacionamento.DAL;
 using Estacionamento.Models;
+using Estacionamento.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,9 +35,23 @@ namespace Estacionamento
             services.AddScoped<MovimentacaoDAO>();
 
 
+            services.AddScoped<Sessao>();
+
+            services.AddHttpContextAccessor();
+
             //Definicao do BD e string de conexao
             services.AddDbContext<Context>(options => options.UseSqlServer(Configuration.GetConnectionString("Connection")));
 
+            services.AddIdentity<Usuario, IdentityRole>().
+               AddEntityFrameworkStores<Context>().AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Usuario/Login";
+                options.AccessDeniedPath = "/Usuario/AcessoNegado";
+            });
+
+            services.AddSession();
 
             services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
@@ -55,7 +71,11 @@ namespace Estacionamento
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

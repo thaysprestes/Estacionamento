@@ -2,7 +2,7 @@
 
 namespace Estacionamento.Migrations
 {
-    public partial class AddClienteEmCarro : Migration
+    public partial class AddClienteUsuario : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
