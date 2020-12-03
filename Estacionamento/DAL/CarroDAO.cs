@@ -38,17 +38,13 @@ namespace Estacionamento.DAL
             return false;
         }
 
-        //public bool Remover(Carro c)
-        //{
-        //    if (MovimentacaoDAO.ConsultarSeCarroEstacionado(c) == null)
-        //    {
-        //        _context.Carros.Remove(c);
-        //        _context.SaveChanges();
-        //        return true;
-        //    }
-        //    return false;
+        public void Remover(Carro c)
+        {
+           _context.Carros.Remove(c);
+           _context.SaveChanges();
+        }
 
-        //}
+
 
         public Carro BuscarCarroPorPlaca(string placa)
         {

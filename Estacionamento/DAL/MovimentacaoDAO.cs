@@ -104,5 +104,8 @@ namespace Estacionamento.DAL
         //talvez tenha que fazer um join? ver exemplo produto/categoria no projeto Vendas WEB
         public List<Movimentacao> BuscarHistoricoDeCarroEstacionado(int id) => _context.Movimentacao.Where(m => m.Carro.Id == id && m.Total != 0).ToList();
 
+        // Metodo criado para não deixar excluir carro que tem histórico de faturamento e não estourar exception de violacao de FK na Movimentacao
+        public Movimentacao ConsultarSeCarroTemHistorico(Carro carro) => _context.Movimentacao.Where(m => m.Carro.Id == carro.Id && m.Total > 0).FirstOrDefault(); 
+
     }
 }

@@ -13,11 +13,13 @@ namespace Estacionamento.Controllers
     {
         private readonly CarroDAO _carroDAO;
         private readonly ClienteDAO _clienteDAO;
+        private readonly MovimentacaoDAO _movimentacaoDAO;
 
-        public CarroController(CarroDAO carroDAO, ClienteDAO clienteDAO)
+        public CarroController(CarroDAO carroDAO, ClienteDAO clienteDAO, MovimentacaoDAO movimentacaoDAO)
         {
             _carroDAO = carroDAO;
             _clienteDAO = clienteDAO;
+            _movimentacaoDAO = movimentacaoDAO;
         }
 
         public IActionResult Cadastrar()
@@ -51,10 +53,46 @@ namespace Estacionamento.Controllers
             return View();
         }
 
+
+
         public IActionResult Remover()
         {
             return View();
         }
+        
+        [HttpPost]
+        public IActionResult Remover(string placa)
+        {
+            if (ModelState.IsValid)
+            {
+                Carro carro = _carroDAO.BuscarCarroPorPlaca(placa);
+                if(carro != null)
+                {
+                    if (_movimentacaoDAO.ConsultarSeCarroEstacionado(carro) == null)
+                    {
+                        if(_movimentacaoDAO.ConsultarSeCarroTemHistorico(carro) == null)
+                        {
+                            _carroDAO.Remover(carro);
+                            return RedirectToAction("Index", "Estacionamento");
+                        } else
+                        {
+                            ModelState.AddModelError("", "Não foi possível Excluir. Placa com Histórico de estacionamento");
+                        }
+                    } else
+                    {
+                        ModelState.AddModelError("", "Não foi possível Excluir. Placa Estacionada");
+                    }
+                } else
+                {
+                    ModelState.AddModelError("", "Não foi possível Excluir. Placa Inexistente");
+                }         
+            }
+            return View();
+        }
+
+
+
+
 
         public IActionResult Listar()
         {
