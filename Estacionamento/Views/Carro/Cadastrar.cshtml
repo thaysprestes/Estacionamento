@@ -14,7 +14,7 @@
         <div class="form-group">
             <label asp-for="Marca">Marca</label>
             <!--<input asp-for="Marca" type="text" class="form-control" placeholder="VW">-->
-            <select class="form-control" id="Marca" name="locality">
+            <select asp-for="Marca" class="form-control">
             </select>
             <span class="text-danger" asp-validation-for="Marca"></span>
         </div>
