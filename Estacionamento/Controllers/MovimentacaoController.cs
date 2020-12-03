@@ -52,7 +52,7 @@ namespace Estacionamento.Controllers
             Movimentacao movimentacao = _movimentacaoDAO.Retirar(carro);
             if (movimentacao != null)
             {
-                ViewBag.Valor = movimentacao.Total;
+                ViewBag.Valor = movimentacao.Total.ToString("C2");
                 ViewBag.Total = "Total:";
                 return View();
             }
