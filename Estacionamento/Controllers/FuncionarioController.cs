@@ -44,37 +44,5 @@ namespace Estacionamento.Controllers
             }
             return View();
         }
-
-        public IActionResult Editar()
-        {
-            return View();
-        }
-
-        public IActionResult Remover()
-        {
-            ViewBag.Title = "Remover Funcionário";
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Remover(string cpf)
-        {
-            if (ModelState.IsValid)
-            {
-                if (ValidarCpf.Validar(cpf))
-                {
-                    if (_funcionarioDAO.Remover(cpf))
-                    {
-                        return RedirectToAction("Index", "Estacionamento");
-                    }
-                    ModelState.AddModelError("", "Exclusão NÃO efetuado! CPF Inexistente!");
-                } else
-                {
-                    ModelState.AddModelError("", "CPF Inválido!");
-                }
-            }
-            return View();
-            
-        }
     }
 }

@@ -46,5 +46,20 @@ namespace Estacionamento.Controllers
             return View(carro);
         }
 
+        public IActionResult Editar()
+        {
+            return View();
+        }
+
+        public IActionResult Remover()
+        {
+            return View();
+        }
+
+        public IActionResult Listar()
+        {
+            return View();
+        }
+
     }
 }
