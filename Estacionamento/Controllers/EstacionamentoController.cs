@@ -12,19 +12,19 @@ namespace Estacionamento.Controllers
 {
     public class EstacionamentoController : Controller
     {
-        private readonly CarroDAO _carroDAO;
+        private readonly MovimentacaoDAO _movimentacaoDAO;
         private readonly EstacionamentoDAO _estacionamentoDAO;
 
-        public EstacionamentoController(CarroDAO carroDAO, EstacionamentoDAO estacionamentoDAO)
+        public EstacionamentoController(MovimentacaoDAO movimentacaoDAO, EstacionamentoDAO estacionamentoDAO)
         {
-            _carroDAO = carroDAO;
+            _movimentacaoDAO = movimentacaoDAO;
             _estacionamentoDAO = estacionamentoDAO;
         }
 
         public IActionResult Index()
         {
             ViewBag.Title = "Estacionamento JRT";
-            return View(_carroDAO.Listar());
+            return View(_movimentacaoDAO.ListarCarrosEstacionados());
         }
 
         [Authorize]

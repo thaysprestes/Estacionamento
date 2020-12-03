@@ -94,7 +94,8 @@ namespace Estacionamento.DAL
 
         public Movimentacao ConsultarSeCarroEstacionado(Carro carro) => _context.Movimentacao.Where(m => m.Carro.Id == carro.Id && m.Total == 0).FirstOrDefault();
 
-        public List<Movimentacao> ListarCarrosEstacionados() => _context.Movimentacao.Where(m => m.Total == 0).ToList();
+        public List<Movimentacao> ListarCarrosEstacionados() => _context.Movimentacao.Include(x => x.Carro).Where(m => m.Total == 0).ToList();
+
         //public  List<Movimentacao> ListarCarrosEstacionados(int id) => _context.Movimentacoes.Where(m => m.Carro.Id == id).ToList();
         public List<Movimentacao> Listar() => _context.Movimentacao.ToList();
 
