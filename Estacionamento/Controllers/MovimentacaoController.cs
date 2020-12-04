@@ -38,9 +38,20 @@ namespace Estacionamento.Controllers
         public IActionResult Estacionar(string placa, string id)
         {
             Carro carro = _carroDAO.BuscarCarroPorPlaca(placa);
-            if (_movimentacaoDAO.Estacionar(carro, id)){
-                return RedirectToAction("Index", "Estacionamento");
-            }
+            if(carro != null)
+            {
+                if (_movimentacaoDAO.ConsultarSeCarroEstacionado(carro) == null)
+                {
+                    if (_movimentacaoDAO.Estacionar(carro, id))
+                    {
+                        return RedirectToAction("Index", "Estacionamento");
+                    }
+                } else
+                {
+                    ModelState.AddModelError("", "Placa já Estacionada!");
+                    return View();
+                }
+            }  
             ModelState.AddModelError("", "Placa inválida!");
             return View();
         }
@@ -49,13 +60,20 @@ namespace Estacionamento.Controllers
         public IActionResult Retirar(string placa)
         {
             Carro carro = _carroDAO.BuscarCarroPorPlaca(placa);
-            Movimentacao movimentacao = _movimentacaoDAO.Retirar(carro);
-            if (movimentacao != null)
+            if(carro != null)
             {
-                ViewBag.Valor = movimentacao.Total.ToString("C2");
-                ViewBag.Total = "Total:";
-                return View();
-            }
+                Movimentacao movimentacao = _movimentacaoDAO.Retirar(carro);
+                if (movimentacao != null)
+                {
+                    ViewBag.Valor = movimentacao.Total.ToString("C2");
+                    ViewBag.Total = "Total:";
+                    return View();
+                } else
+                {
+                    ModelState.AddModelError("", "Placa não estacionada!");
+                    return View();
+                }
+            }          
             ModelState.AddModelError("", "Placa inválida!");
             return View();
         }
@@ -64,9 +82,19 @@ namespace Estacionamento.Controllers
         public IActionResult Reservar(string placa)
         {
             Carro carro = _carroDAO.BuscarCarroPorPlaca(placa);
-            if (_movimentacaoDAO.Reservar(carro))
+            if(carro != null)
             {
-                return RedirectToAction("Index", "Estacionamento");
+                if (_movimentacaoDAO.ConsultarSeCarroEstacionado(carro) == null) 
+                {
+                    if (_movimentacaoDAO.Reservar(carro))
+                    {
+                        return RedirectToAction("Index", "Estacionamento");
+                    }
+                } else
+                {
+                    ModelState.AddModelError("", "Placa já estacionada!");
+                    return View();
+                }                 
             }
             ModelState.AddModelError("", "Placa inválida!");
             return View();

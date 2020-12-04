@@ -56,7 +56,7 @@ namespace Estacionamento.DAL
 
             if(status == 2)
             {
-                movimentacao.Total = (estacionamento.Diaria * Math.Ceiling((movimentacao.Saida - movimentacao.Entrada).TotalDays)) * 0.1;
+                movimentacao.Total = (estacionamento.Diaria * Math.Ceiling((movimentacao.Saida - movimentacao.Entrada).TotalDays)) * 0.9;
             }
             else if (movimentacao.Modalidade == Modalidade.Diaria)
             {
