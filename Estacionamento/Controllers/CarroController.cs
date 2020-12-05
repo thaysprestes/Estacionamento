@@ -34,58 +34,64 @@ namespace Estacionamento.Controllers
         {
            
             if (ModelState.IsValid)
-            {
+            { 
                 carro.Cliente = _clienteDAO.BuscarPorId(carro.ClienteId);
                 if (_carroDAO.Cadastrar(carro))
                 {
                     return RedirectToAction("Index", "Estacionamento");
-                }
-                ModelState.AddModelError("", "Não foi possível cadastrar pois já existe um carro com essa placa");
-               
+                } else
+                {
+                    ModelState.AddModelError("", "Não foi possível cadastrar pois já existe um carro com essa placa");
+                }          
             }
             ViewBag.Clientes = new SelectList(_clienteDAO.Listar(), "Id", "Nome");
             ViewBag.Title = "Cadastro Carro";
             return View(carro);
         }
 
+
         public IActionResult Editar()
         {
             return View();
         }
 
-
+     
 
         public IActionResult Remover()
-        {
+        {     
             return View();
         }
-        
+
+
         [HttpPost]
         public IActionResult Remover(string placa)
         {
             if (ModelState.IsValid)
             {
                 Carro carro = _carroDAO.BuscarCarroPorPlaca(placa);
-                if(carro != null)
+                if (carro != null)
                 {
                     if (_movimentacaoDAO.ConsultarSeCarroEstacionado(carro) == null)
                     {
-                        if(_movimentacaoDAO.ConsultarSeCarroTemHistorico(carro) == null)
+                        if (_movimentacaoDAO.ConsultarSeCarroTemHistorico(carro) == null)
                         {
                             _carroDAO.Remover(carro);
                             return RedirectToAction("Index", "Estacionamento");
-                        } else
+                        }
+                        else
                         {
                             ModelState.AddModelError("", "Não foi possível Excluir. Placa com Histórico de estacionamento");
                         }
-                    } else
+                    }
+                    else
                     {
                         ModelState.AddModelError("", "Não foi possível Excluir. Placa Estacionada");
                     }
-                } else
+                }
+                else
                 {
                     ModelState.AddModelError("", "Não foi possível Excluir. Placa Inexistente");
-                }         
+                }
             }
             return View();
         }
@@ -96,8 +102,18 @@ namespace Estacionamento.Controllers
 
         public IActionResult Listar()
         {
-            return View();
+            return View(_carroDAO.Listar());
         }
+
+
+        
+
+
+
+
+
+
+
 
     }
 }

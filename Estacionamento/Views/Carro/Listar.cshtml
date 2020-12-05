@@ -1,1 +1,60 @@
-﻿<h1>Listar</h1>
+﻿@model IEnumerable<Estacionamento.Models.Carro>
+
+@{
+    ViewData["Title"] = "Listar";
+}
+
+<h1>Listagem de Carros</h1>
+
+<p>
+    <a asp-action="Cadastrar">Cadastrar Novo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Marca
+            </th>
+            <th>
+                Modelo
+            </th>
+            <th>
+                Cor
+            </th>
+            <th>
+                Placa
+            </th>
+            <th>
+                Cliente
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr class="table-active">
+            <td>
+                @item.Marca
+            </td>
+            <td>
+                @item.Modelo
+            </td>
+            <td>
+                @item.Cor
+            </td>
+            <td>
+                @item.Placa
+            </td>
+            <td>
+                @item.Cliente.Nome
+            </td>
+            
+
+            @*<td>
+                <a asp-action="Remover" asp-controller="Carro" asp-route-placa="@item.Placa" class="btn btn-danger">Remover</a>
+                <a asp-action="Editar" asp-controller="Carro" asp-route-placa="@item.Id" class="btn btn-danger">Editar</a>
+            </td>*@
+
+        </tr>
+}
+    </tbody>
+</table>
