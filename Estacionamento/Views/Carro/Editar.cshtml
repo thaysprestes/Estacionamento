@@ -1,1 +1,43 @@
-﻿<h1>Editar</h1>
+﻿@model Carro
+
+<form asp-action="Editar" asp-controller="Carro" method="post" enctype="multipart/form-data">
+    <fieldset>
+        <legend>Editar Carro</legend>
+
+        <div class="form-group">
+            <label asp-for="Placa">Placa</label>
+            <input asp-for="Placa" type="text" class="form-control" readonly>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ClienteId">Cliente:</label>
+            <select class="form-control" asp-items="ViewBag.Clientes" asp-for="ClienteId">
+                <option> - Selecione -</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Marca">Marca</label>
+            <select asp-for="Marca" class="form-control">
+            </select>
+            <span class="text-danger" asp-validation-for="Marca"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Modelo">Modelo</label>
+            <input asp-for="Modelo" type="text" class="form-control" placeholder="Fusca">
+            <span class="text-danger" asp-validation-for="Modelo"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Cor">Cor</label>
+            <input asp-for="Cor" type="text" class="form-control" placeholder="Preto">
+            <span class="text-danger" asp-validation-for="Cor"></span>
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Editar" />
+
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+    </fieldset>
+</form>

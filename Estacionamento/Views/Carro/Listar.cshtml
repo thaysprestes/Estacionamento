@@ -27,6 +27,9 @@
             <th>
                 Cliente
             </th>
+            <th>
+                Alterar
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -47,12 +50,15 @@
             <td>
                 @item.Cliente.Nome
             </td>
+            <td>
+                <a class="btn btn-secondary" asp-action="Editar" asp-controller="Carro" asp-route-id="@item.Id">Alterar</a> <br />
+            </td>
             
 
             @*<td>
-                <a asp-action="Remover" asp-controller="Carro" asp-route-placa="@item.Placa" class="btn btn-danger">Remover</a>
-                <a asp-action="Editar" asp-controller="Carro" asp-route-placa="@item.Id" class="btn btn-danger">Editar</a>
-            </td>*@
+            <a asp-action="Remover" asp-controller="Carro" asp-route-placa="@item.Placa" class="btn btn-danger">Remover</a>
+            <a asp-action="Editar" asp-controller="Carro" asp-route-placa="@item.Id" class="btn btn-danger">Editar</a>
+        </td>*@
 
         </tr>
 }

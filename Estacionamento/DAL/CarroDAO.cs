@@ -31,7 +31,18 @@ namespace Estacionamento.DAL
         {
             if (BuscarPorId(c.Id) != null)
             {
-                _context.Carros.Update(c);
+                var local = _context.Set<Carro>().Local.FirstOrDefault(entry => entry.Id.Equals(c.Id));
+
+                // check if local is not null 
+                if (local != null)
+                {
+                    // detach
+                    _context.Entry(local).State = EntityState.Detached;
+                }
+                // set Modified flag in your entry
+                _context.Entry(c).State = EntityState.Modified;
+
+                // save 
                 _context.SaveChanges();
                 return true;
             }
@@ -40,8 +51,8 @@ namespace Estacionamento.DAL
 
         public void Remover(Carro c)
         {
-           _context.Carros.Remove(c);
-           _context.SaveChanges();
+            _context.Carros.Remove(c);
+            _context.SaveChanges();
         }
 
 

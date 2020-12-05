@@ -50,9 +50,10 @@ namespace Estacionamento.Controllers
         }
 
 
-        public IActionResult Editar()
+        public IActionResult Editar(int id)
         {
-            return View();
+            ViewBag.Clientes = new SelectList(_clienteDAO.Listar(), "Id", "Nome");
+            return View(_carroDAO.BuscarPorId(id));
         }
 
      
@@ -105,8 +106,20 @@ namespace Estacionamento.Controllers
             return View(_carroDAO.Listar());
         }
 
+        [HttpPost]
+        public IActionResult Editar(Carro carro)
+        {
+            if (ModelState.IsValid)
+            {
+                if (_carroDAO.Alterar(carro))
+                {
+                    return RedirectToAction("Index", "Estacionamento");
+                }
+                ModelState.AddModelError("", "Não foi possível alterar esse carro");
+            }
+            return View(carro);
+        }
 
-        
 
 
 
