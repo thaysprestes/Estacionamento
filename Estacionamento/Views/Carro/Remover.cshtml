@@ -1,1 +1,17 @@
-﻿<h1>Remover</h1>
+﻿@model Carro
+
+<form asp-action="Remover" asp-controller="Carro" method="post" enctype="multipart/form-data">
+    <fieldset>
+        <legend>Excluir Carro</legend>
+
+        <div class="form-group">
+            <label for="placa">Informe a Placa: </label>
+            <input name="placa" type="text" class="form-control" placeholder="AAA-0000">
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Excluir" />
+
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+    </fieldset>
+</form>

@@ -51,18 +51,22 @@ namespace Estacionamento.DAL
             Estacionamentos estacionamento = _context.Estacionamento.FirstOrDefault(x => x.Id == 1);
             Movimentacao movimentacao = _context.Movimentacao.Include(x => x.Vaga).Where(m => m.Carro.Id == carro.Id && m.Total == 0).FirstOrDefault();
             Vaga vaga = movimentacao.Vaga;
-            vaga.Status = StatusVaga.Livre;
             movimentacao.Saida = DateTime.Now;
-            if (movimentacao.Modalidade == Modalidade.Diaria)
+            int status = (int)vaga.Status;
+
+            if(status == 2)
             {
-                movimentacao.Total = estacionamento.Diaria * (movimentacao.Saida - movimentacao.Entrada).TotalDays;
+                movimentacao.Total = (estacionamento.Diaria * Math.Ceiling((movimentacao.Saida - movimentacao.Entrada).TotalDays)) * 0.9;
             }
-            else
+            else if (movimentacao.Modalidade == Modalidade.Diaria)
+            {
+                movimentacao.Total = (estacionamento.Diaria * Math.Ceiling((movimentacao.Saida - movimentacao.Entrada).TotalDays));
+            } else
             {
                 movimentacao.Total = estacionamento.Horista * (movimentacao.Saida - movimentacao.Entrada).TotalHours;
             }
 
-
+            vaga.Status = StatusVaga.Livre;
             _context.Movimentacao.Update(movimentacao);
             _context.Vagas.Update(vaga);
             _context.SaveChanges();
@@ -103,6 +107,9 @@ namespace Estacionamento.DAL
 
         //talvez tenha que fazer um join? ver exemplo produto/categoria no projeto Vendas WEB
         public List<Movimentacao> BuscarHistoricoDeCarroEstacionado(int id) => _context.Movimentacao.Where(m => m.Carro.Id == id && m.Total != 0).ToList();
+
+        // Metodo criado para não deixar excluir carro que tem histórico de faturamento e não estourar exception de violacao de FK na Movimentacao
+        public Movimentacao ConsultarSeCarroTemHistorico(Carro carro) => _context.Movimentacao.Where(m => m.Carro.Id == carro.Id && m.Total > 0).FirstOrDefault(); 
 
     }
 }
