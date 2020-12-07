@@ -62,17 +62,26 @@ namespace Estacionamento.Controllers
             Carro carro = _carroDAO.BuscarCarroPorPlaca(placa);
             if(carro != null)
             {
-                Movimentacao movimentacao = _movimentacaoDAO.Retirar(carro);
-                if (movimentacao != null)
+                if (_movimentacaoDAO.ConsultarSeCarroEstacionado(carro) != null)
                 {
-                    ViewBag.Valor = movimentacao.Total.ToString("C2");
-                    ViewBag.Total = "Total:";
-                    return View();
+                    Movimentacao movimentacao = _movimentacaoDAO.Retirar(carro);
+                    if (movimentacao != null)
+                    {
+                        ViewBag.Valor = movimentacao.Total.ToString("C2");
+                        ViewBag.Total = "Total:";
+                        return View();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Placa não estacionada!");
+                        return View();
+                    }
                 } else
                 {
                     ModelState.AddModelError("", "Placa não estacionada!");
                     return View();
                 }
+                   
             }          
             ModelState.AddModelError("", "Placa inválida!");
             return View();
