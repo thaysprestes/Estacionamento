@@ -32,7 +32,7 @@
 
         <div class="form-group">
             <label asp-for="Placa">Placa</label>
-            <input asp-for="Placa" type="text" class="form-control" placeholder="AAA-0000">
+            <input asp-for="Placa" type="text" class="form-control placa" placeholder="AAA-0000" onkeyup="this.value = this.value.toUpperCase();">
             <span class="text-danger" asp-validation-for="Placa"></span>
         </div>
 

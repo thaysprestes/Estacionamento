@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Estacionamento.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20201203024634_CriarBase")]
+    [Migration("20201207015433_CriarBase")]
     partial class CriarBase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
